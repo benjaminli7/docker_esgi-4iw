@@ -1,6 +1,4 @@
 plex/movies
 plex/tvseries
 plex/library
-overseer/**
-radarr/**
-sonarr/**
+overseer/config
