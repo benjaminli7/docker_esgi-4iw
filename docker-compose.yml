@@ -1,7 +1,7 @@
 version: "2.1"
 services:
   plex:
-    image: linuxserver/plex
+    image: lscr.io/linuxserver/plex:latest
     container_name: plex
     environment:
       - PUID=1000
@@ -15,3 +15,46 @@ services:
     restart: unless-stopped
     ports:
       - 32400:32400
+
+  overseerr:
+    image: lscr.io/linuxserver/overseerr:latest
+    container_name: overseerr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - ./overseer/config:/config
+    ports:
+      - 5055:5055
+    restart: unless-stopped
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - ./radarr/data:/config
+      - ./plex/movies:/movies #optional
+      - ./radarr/downloadclient-downloads:/downloads #optional
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - ./sonarr/data:/config
+      - ./plex/tvseries:/tv #optional
+      - ./sonarr/downloadclient-downloads:/downloads #optional
+    ports:
+      - 8989:8989
+    restart: unless-stopped
