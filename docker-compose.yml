@@ -41,7 +41,7 @@ services:
     volumes:
       - ./radarr/data:/config
       - ./plex/movies:/movies #optional
-      - ./radarr/downloadclient-downloads:/downloads #optional
+      - ./radarr/downloads:/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -59,7 +59,7 @@ services:
     volumes:
       - ./sonarr/data:/config
       - ./plex/tvseries:/tv #optional
-      - ./sonarr/downloadclient-downloads:/downloads #optional
+      - ./sonarr/downloads:/downloads #optional
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -89,8 +89,8 @@ services:
       - TZ=Europe/London
       - DELUGE_LOGLEVEL=error #optional
     volumes:
-      - /deluge/config:/config
-      - /deluge/downloadclient-downloads:/downloads
+      - ./deluge/config:/config
+      - ./deluge/downloads:/downloads
     ports:
       - 8112:8112
       - 6881:6881
@@ -107,9 +107,7 @@ services:
       - PGID=1000
       - TZ=Europe/London
     volumes:
-      - ./config/bazarr:/config
-      - ./movies:/movies
-      - ./tv:/tv
+      - ./bazarr/config:/config
     ports:
       - 6767:6767
     restart: unless-stopped
