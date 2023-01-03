@@ -108,11 +108,6 @@ services:
       - TZ=Europe/London
     volumes:
       - ./bazarr/config:/config
-<<<<<<< HEAD
-      - ./movies:/movies
-      - ./tv:/tv
-=======
->>>>>>> 54e8726efd1c957638cd043549dccfed26817491
     ports:
       - 6767:6767
     restart: unless-stopped
