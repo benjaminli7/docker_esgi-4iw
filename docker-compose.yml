@@ -107,9 +107,26 @@ services:
       - PGID=1000
       - TZ=Europe/London
     volumes:
-      - ./config/bazarr:/config
+      - ./bazarr/config:/config
       - ./movies:/movies
       - ./tv:/tv
     ports:
       - 6767:6767
+    restart: unless-stopped
+
+  swag:
+    image: linuxserver/swag
+    container_name: swag
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - URL=bencam.duckdns.org
+      - VALIDATION=duckdns
+      - DUCKDNSTOKEN=a1591578-25d1-4e83-b830-018f18b4339d
+    volumes:
+      - ./swag/config:/config
+    ports:
+      - 443:443
+      - 80:80
     restart: unless-stopped
